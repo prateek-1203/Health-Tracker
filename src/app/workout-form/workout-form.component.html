@@ -1,0 +1,43 @@
+
+<div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+  <h1 class="text-center text-xl font-semibold mb-6">Health Challenge Tracker</h1>
+  <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-md">
+    <form (ngSubmit)="onSubmit()" #workoutForm="ngForm" class="space-y-6">
+      <div class="form-group">
+        <label for="userName" class="block text-sm font-medium text-gray-700">User Name</label>
+        <input type="text" id="userName" [(ngModel)]="userName" name="userName" 
+               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+               required #userNameInput="ngModel">
+        <div *ngIf="userNameInput.invalid && userNameInput.touched" class="text-red-600 text-sm">
+          User Name is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="workoutType" class="block text-sm font-medium text-gray-700">Workout Type</label>
+        <select id="workoutType" [(ngModel)]="workoutType" name="workoutType" 
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                required #workoutTypeSelect="ngModel">
+          <option value="" disabled selected>Select a type</option>
+          <option value="Cardio">Cardio</option>
+          <option value="Strength">Strength</option>
+          <option value="Flexibility">Flexibility</option>
+          <option value="Balance">Balance</option>
+        </select>
+        <div *ngIf="workoutTypeSelect.invalid && workoutTypeSelect.touched" class="text-red-600 text-sm">
+          Workout Type is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="workoutMinutes" class="block text-sm font-medium text-gray-700">Workout Minutes</label>
+        <input type="number" id="workoutMinutes" [(ngModel)]="workoutMinutes" name="workoutMinutes" 
+               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+               inputmode="numeric" pattern="[0-9]*" min="0" required>
+      </div>
+
+      <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              [disabled]="workoutForm.invalid">Add Workout</button>
+    </form>
+  </div>
+</div>
